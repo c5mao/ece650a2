@@ -1,12 +1,8 @@
 #include <iostream>
 #include <vector>
-<<<<<<< HEAD
 #include <string>
-
-=======
 #include <string.h>
 #include <bits/stdc++.h> 
->>>>>>> 3f64201f5dca732acaacee2cecf756f98ab4ce55
 
 using namespace std;
 
@@ -21,8 +17,6 @@ vector<string> parse_line(string line){
         cout << value << endl;
         parsed_line.push_back(value);
     }
-
-
 
     return parsed_line;
 
