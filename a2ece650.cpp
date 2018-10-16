@@ -4,21 +4,8 @@
 
 using namespace std;
 
-class line{
-  public:
-    unsigned int srt; //srt vertex of line
-    unsigned int dst; //dst vertex of line
-};
-
-class line_db{
-  public:
-    unsigned int no_of_vertices;
-    line edge[];
-};
-
 vector<string> parse_line(string line){
     vector<string> parsed_line;
-    line_db db;
     cout << line[0] << endl;
     if (line[0]=='V'){
     	// Find position of ':' using find() 
@@ -27,10 +14,6 @@ vector<string> parse_line(string line){
         string value = line.substr(pos + 1); 
         cout << value << endl;
         parsed_line.push_back(value);
-        db.no_of vertices = 2;
-        db.edge[0].srt = 0;
-        db.edge[0].dst = 1;
-        cout << "The edge is from %d to %d", db.edge[0].src, db.edge[0].dst <<endl
     }
 
 
