@@ -115,14 +115,14 @@ void printShortestDistance(vector<int> adj[], int s,
 	} 
 
 	// distance from source is in distance array 
-	cout << "Shortest path length is : "
+	cout << "Error: Shortest path length is : "
 		<< dist[dest] << endl; 
 
 	// printing path from source to destination 
-	cout << "Path is::\n"; 
-	for (int i = path.size() - 1; i >= 0; i--) 
-		cout << path[i] << " "; 
-	cout << endl;
+	cout << "Error: Path is::\n"; 
+	for (int i = path.size() - 1; i > 0; i--) 
+		cout << path[i] << "-"; 
+	cout << path[0] << endl; 
 } 
 
 
@@ -215,20 +215,21 @@ void printShortestDistance_test(vector<int> *adj, int s,
 	} 
 
 	// distance from source is in distance array 
-	cout << "Shortest path length is : "
+	cout << "Error: Shortest path length is : "
 		<< dist[dest] << endl; 
 
 	// printing path from source to destination 
-	cout << "Path is::\n"; 
-	for (int i = path.size() - 1; i >= 0; i--) 
-		cout << path[i] << " "; 
-	cout << endl;
+	cout << "Error: Path is::\n"; 
+	for (int i = path.size() - 1; i > 0; i--) 
+		cout << path[i] << "-"; 
+	cout << path[0] << endl; 
 } 
 ///////////////////////
 int parse_line(string line){
     int error=0;
     unsigned int i;
-    cout << line[0] << endl;
+    //for debug
+    //cout << line[0] << endl;
     if (line[0]=='V'){
     	// Find position of ':' using find() 
         int pos = line.find(" "); 
@@ -252,7 +253,8 @@ int parse_line(string line){
             for (; it != reg_end; ++it) {
             	i=0;
             	string s=it->str();
-            	cout << s << endl;
+            	//for debug
+            	//cout << s << endl;
             	sregex_iterator iter(s.begin(), s.end(), num);
                 while(iter != reg_end){
                 	if (i >= 2){
@@ -271,7 +273,8 @@ int parse_line(string line){
                     i++;
                     ++iter;
                 }
-                cout << vertices[0] << "," << vertices[1] << endl;
+                //for debug
+                //cout << vertices[0] << "," << vertices[1] << endl;
                 add_edge(adj, vertices[0], vertices[1]);
                 add_edge_test(node_list, vertices[0], vertices[1]);
             }             
@@ -301,7 +304,8 @@ int parse_line(string line){
             i++;
             ++iter;
         }
-        cout << vertices[0] << "," << vertices[1] << endl;
+        //for debug
+        //cout << vertices[0] << "," << vertices[1] << endl;
     	int source = vertices[0], dest = vertices[1]; 
     	printShortestDistance(adj, source, dest, v);
     	printShortestDistance_test(node_list, source, dest, v);
@@ -345,33 +349,6 @@ int main(){
 	}
 
 	cout << "Error: empty input, exit" << endl;
-
-
-
-    adj[0].clear();
-    adj[1].clear();
-    adj[2].clear();
-    adj[3].clear();
-    adj[4].clear();
-    adj[5].clear();
-    adj[6].clear();
-    adj[7].clear();
-	// Creating graph given in the above diagram. 
-	// add_edge function takes adjacency list, source 
-	// and destination vertex as argument and forms 
-	// an edge between them. 
-	add_edge(adj, 0, 1); 
-	add_edge(adj, 0, 3); 
-	add_edge(adj, 1, 2); 
-	add_edge(adj, 3, 4); 
-	add_edge(adj, 3, 7); 
-	add_edge(adj, 4, 5); 
-	add_edge(adj, 4, 6); 
-	add_edge(adj, 4, 7); 
-	add_edge(adj, 5, 6); 
-	add_edge(adj, 6, 7); 
-	int source = 1, dest = 7; 
-	printShortestDistance(adj, source, dest, v); 
 
 	return 0;
 
