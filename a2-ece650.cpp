@@ -14,6 +14,8 @@ int v = 8;
 // in the form of an adjacency list 
 vector<int> adj[8]; 
 */
+
+#define DEBUG 0
 regex re("<.*?>");
 regex num(R"(\d+)");
 sregex_iterator reg_end;
@@ -21,12 +23,17 @@ sregex_iterator reg_end;
 int v = 100; 
 // array of vectors is used to store the graph 
 // in the form of an adjacency list 
-vector<int> adj[100]; 
+#if DEBUG
+//for debug
+//vector<int> adj[100]; 
+#endif
 vector<int> *node_list = new vector<int>[v];
 /*****************************************************
 Function Prototype
 ******************************************************/
-
+#if DEBUG
+//Original functions from:
+//https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
 // utility function to form edge between two vertices 
 // source and dest 
 void add_edge(vector<int> adj[], int src, int dest) 
@@ -124,7 +131,7 @@ void printShortestDistance(vector<int> adj[], int s,
 		cout << path[i] << "-"; 
 	cout << path[0] << endl; 
 } 
-
+#endif
 
 //test function
 // utility function to form edge between two vertices 
@@ -214,17 +221,20 @@ void printShortestDistance_test(vector<int> *adj, int s,
 		crawl = pred[crawl]; 
 	} 
 
+    //for debug
 	// distance from source is in distance array 
-	cout << "Error: Shortest path length is : "
-		<< dist[dest] << endl; 
+	//cout << "Error: Shortest path length is : "
+	//	<< dist[dest] << endl; 
 
+    //for debug
 	// printing path from source to destination 
-	cout << "Error: Path is::\n"; 
+	//cout << "Error: Path is::\n"; 
+
 	for (int i = path.size() - 1; i > 0; i--) 
 		cout << path[i] << "-"; 
 	cout << path[0] << endl; 
 } 
-///////////////////////
+//Function to parse the input
 int parse_line(string line){
     int error=0;
     unsigned int i;
@@ -247,7 +257,6 @@ int parse_line(string line){
         string str = line.substr(pos + 1); 
         regex_token_iterator<string::iterator> rend;
         try {
-
             sregex_iterator it(str.begin(), str.end(), re);
             int vertices[2]={0,0};
             for (; it != reg_end; ++it) {
@@ -275,7 +284,10 @@ int parse_line(string line){
                 }
                 //for debug
                 //cout << vertices[0] << "," << vertices[1] << endl;
+                #if DEBUG
+                //for comparison
                 add_edge(adj, vertices[0], vertices[1]);
+                #endif
                 add_edge_test(node_list, vertices[0], vertices[1]);
             }             
         } catch (regex_error& e) {
@@ -284,7 +296,6 @@ int parse_line(string line){
             error = 0;
         }
         error = 1;
-
     }else if (line[0]=='s'){
     	// Find position of ':' using find() 
         int pos = line.find(" "); 
@@ -304,10 +315,20 @@ int parse_line(string line){
             i++;
             ++iter;
         }
+        #if DEBUG
         //for debug
-        //cout << vertices[0] << "," << vertices[1] << endl;
-    	int source = vertices[0], dest = vertices[1]; 
+        cout << vertices[0] << "," << vertices[1] << endl;
+        #endif
+
+    	int source = vertices[0], dest = vertices[1];
+    	if (source == dest){
+    		cout << "Error: source and dest are identical vertices" << endl;
+    		return 1;
+    	}
+    	#if DEBUG
+    	//for comparison
     	printShortestDistance(adj, source, dest, v);
+    	#endif
     	printShortestDistance_test(node_list, source, dest, v);
     	error = 1;
     }else{
@@ -329,22 +350,25 @@ int main(){
 
 	    getline(cin, line);
         if(!cin){
+           #if DEBUG
            if(cin.eof())
-             cout << "EOF\n";
+             cout << "Error: EOF\n";
            else
-             cout << "other failure\n";
-           
-           break;
-
+             cout << "Error: other failure\n";
+           #endif
+            break;
         }
         error = parse_line(line);
         if (error == 0){
         	cout << "Error: invalid input" << endl;
         }else if (error == -1){
         	cout << "Error: invalid command" << endl;
-        }else if (error == 1){
+        }
+        #if DEBUG
+        else if (error == 1){
         	cout << "Error: parsing success" << endl;
         }
+        #endif
 
 	}
 
