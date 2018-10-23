@@ -7,31 +7,21 @@ using namespace std;
 /*****************************************************
 Global Variable
 ******************************************************/
-/*
-// no. of vertices 
-int v = 8; 
-// array of vectors is used to store the graph 
-// in the form of an adjacency list 
-vector<int> adj[8]; 
-*/
-
 #define DEBUG 0
+
 regex re("<.*?>");
 regex num(R"(\d+)");
 sregex_iterator reg_end;
 // no. of vertices 
-int v = 100; 
-// array of vectors is used to store the graph 
-// in the form of an adjacency list 
-#if DEBUG
-//for debug
-//vector<int> adj[100]; 
-#endif
+int v = 1; 
 vector<int> *node_list = new vector<int>[v];
 /*****************************************************
 Function Prototype
 ******************************************************/
 #if DEBUG
+// array of vectors is used to store the graph 
+// in the form of an adjacency list 
+vector<int> adj[1]; 
 //Original functions from:
 //https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
 // utility function to form edge between two vertices 
