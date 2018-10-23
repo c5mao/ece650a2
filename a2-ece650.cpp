@@ -21,7 +21,7 @@ Function Prototype
 #if DEBUG
 // array of vectors is used to store the graph 
 // in the form of an adjacency list 
-vector<int> adj[1]; 
+vector<int> adj[100]; 
 //Original functions from:
 //https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
 // utility function to form edge between two vertices 
