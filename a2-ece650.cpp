@@ -238,7 +238,6 @@ int parse_line(string line){
         vector<int> *new_node_list = new vector<int>[v]; 
         delete [] node_list;
         node_list = new_node_list;
-        //node_list[5].push_back(1);
         error = 1;
     }else if (line[0]=='E'){
     	// Find position of ':' using find() 
@@ -256,6 +255,12 @@ int parse_line(string line){
             	cout << s << endl;
             	sregex_iterator iter(s.begin(), s.end(), num);
                 while(iter != reg_end){
+                	if (i >= 2){
+                		vector<int> *new_node_list = new vector<int>[v]; 
+                        delete [] node_list;
+                        node_list = new_node_list;
+                		return 0;
+        	        }
                 	vertices[i]= stoi((*iter)[0]);
                 	if(vertices[i] >= v){
                 		vector<int> *new_node_list = new vector<int>[v]; 
@@ -286,6 +291,9 @@ int parse_line(string line){
     	int vertices[2]={0,0};
         sregex_iterator iter(str.begin(), str.end(), num);
         while(iter != reg_end){
+        	if (i >= 2){
+        		return 0;
+        	}
             vertices[i]= stoi((*iter)[0]);
             if(vertices[i] >= v){
                 return 0;
@@ -297,12 +305,10 @@ int parse_line(string line){
     	int source = vertices[0], dest = vertices[1]; 
     	printShortestDistance(adj, source, dest, v);
     	printShortestDistance_test(node_list, source, dest, v);
-    	error = -1;
+    	error = 1;
     }else{
     	error = -1;
     }
-
-
 
     return error;
 
@@ -328,7 +334,6 @@ int main(){
 
         }
         error = parse_line(line);
-
         if (error == 0){
         	cout << "Error: invalid input" << endl;
         }else if (error == -1){
