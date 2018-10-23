@@ -71,7 +71,7 @@ bool BFS(vector<int> adj[], int src, int dest, int v,
 	while (!queue.empty()) { 
 		int u = queue.front(); 
 		queue.pop_front(); 
-		for (int i = 0; i < adj[u].size(); i++) { 
+		for (unsigned int i = 0; i < adj[u].size(); i++) { 
 			if (visited[adj[u][i]] == false) { 
 				visited[adj[u][i]] = true; 
 				dist[adj[u][i]] = dist[u] + 1; 
@@ -171,7 +171,7 @@ bool BFS_test(vector<int> *adj, int src, int dest, int v,
 	while (!queue.empty()) { 
 		int u = queue.front(); 
 		queue.pop_front(); 
-		for (int i = 0; i < adj[u].size(); i++) { 
+		for (unsigned int i = 0; i < adj[u].size(); i++) { 
 			if (visited[adj[u][i]] == false) { 
 				visited[adj[u][i]] = true; 
 				dist[adj[u][i]] = dist[u] + 1; 
