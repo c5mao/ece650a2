@@ -241,12 +241,12 @@ int parse_line(string line){
         node_list = new_node_list;
         error = 1;
     }else if (line[0]=='E'){
-    	// Find position of ':' using find() 
-        int pos = line.find(" "); 
-        // Copy substring after pos 
-        string str = line.substr(pos + 1); 
-        regex_token_iterator<string::iterator> rend;
-        try {
+    	try {
+    	    // Find position of ':' using find() 
+            int pos = line.find(" "); 
+            // Copy substring after pos 
+            string str = line.substr(pos + 1); 
+            regex_token_iterator<string::iterator> rend;
             sregex_iterator it(str.begin(), str.end(), re);
             int vertices[2]={0,0};
             for (; it != reg_end; ++it) {
@@ -280,7 +280,7 @@ int parse_line(string line){
                 #endif
                 add_edge_test(node_list, vertices[0], vertices[1]);
             }             
-        } catch (regex_error& e) {
+        } catch (...) {
             // Syntax error in the regular expression
             cout << "Error: unexpect errors" << endl;
             error = 0;
@@ -330,38 +330,36 @@ int parse_line(string line){
 }
 
 int main(){
-
 	string line;
 	int error;
 
-
-
 	while(1){
-
-	    getline(cin, line);
-        if(!cin){
-           #if DEBUG
-           if(cin.eof())
-             cout << "Error: EOF\n";
-           else
-             cout << "Error: other failure\n";
-           #endif
-            break;
-        }
-        error = parse_line(line);
-        if (error == 0){
-        	cout << "Error: invalid input" << endl;
-        }else if (error == -1){
-        	cout << "Error: invalid command" << endl;
-        }
-        #if DEBUG
-        else if (error == 1){
-        	cout << "Error: parsing success" << endl;
-        }
-        #endif
-
+	    try{
+   	        getline(cin, line);
+            if(!cin){
+               #if DEBUG
+               if(cin.eof())
+                 cout << "Error: EOF\n";
+               else
+                 cout << "Error: other failure\n";
+               #endif
+                break;
+            }
+            error = parse_line(line);
+            if (error == 0){
+        	    cout << "Error: invalid input" << endl;
+            }else if (error == -1){
+        	    cout << "Error: invalid command" << endl;
+            }
+            #if DEBUG
+            else if (error == 1){
+        	    cout << "Error: parsing success" << endl;
+            }
+            #endif
+	    }catch(...){
+	    	cout << "Error: unexpected error" << endl;
+	    }
 	}
-
 	cout << "Error: empty input, exit" << endl;
 
 	return 0;
