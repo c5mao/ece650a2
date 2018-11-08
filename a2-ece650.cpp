@@ -360,7 +360,7 @@ int main(){
 	    	cout << "Error: unexpected error" << endl;
 	    }
 	}
-	cout << "Error: empty input, exit" << endl;
+	c//out << "Error: empty input, exit" << endl;
 
 	return 0;
 
